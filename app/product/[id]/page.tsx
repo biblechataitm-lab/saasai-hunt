@@ -21,19 +21,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     return { title: 'Product Not Found — SaaSHunt' };
   }
 
-  const images = Array.isArray(product.coverImages) && product.coverImages.length > 0
-    ? product.coverImages
-    : product.logo
-    ? [product.logo]
-    : [];
-
   return {
-    title: `${product.title} — ${product.tagline || ''} | SaaSHunt`,
-    description: product.description || product.tagline || 'SaaS product on SaaSHunt',
+    title: `${product.title} — ${product.tagline} | SaaSHunt`,
+    description: product.description || product.tagline,
     openGraph: {
       title: product.title,
-      description: product.tagline || '',
-      images,
+      description: product.tagline,
+      images: product.coverImages.length > 0 ? product.coverImages : [product.logo],
     },
   };
 }
@@ -83,15 +77,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     : null;
 
   // Render Rich Text / Markdown Description safely
-  const rawDescription = product.description || product.tagline || '';
+  const rawDescription = product.description || product.tagline;
   const richHtmlDescription = await marked.parse(rawDescription);
 
   // JSON-LD Structured Data Schema for Advanced SEO
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: product.title || 'Software Application',
-    description: product.tagline || '',
+    name: product.title,
+    description: product.tagline,
     applicationCategory: product.category || 'BusinessApplication',
     operatingSystem: 'Web',
     offers: {
@@ -104,17 +98,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       ratingValue: '5',
       ratingCount: product.upvotes || 1,
     },
-    author: product.maker?.name
+    author: product.maker
       ? {
           '@type': 'Person',
           name: product.maker.name,
         }
       : undefined,
-    url: product.link || '#',
+    url: product.link,
   };
-
-  const tags = Array.isArray(product.tags) ? product.tags : [];
-  const techStack = Array.isArray(product.techStack) ? product.techStack : [];
 
   return (
     <div className="container main-layout">
@@ -146,8 +137,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
             <SafeImage
               src={product.logo || ''}
-              alt={product.title || ''}
-              fallbackText={(product.title || 'SH').slice(0, 2).toUpperCase()}
+              alt={product.title}
+              fallbackText={product.title.slice(0, 2).toUpperCase()}
               style={{
                 width: '80px',
                 height: '80px',
@@ -171,17 +162,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </p>
 
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                {product.link && (
-                  <a
-                    href={product.link}
-                    target="_blank"
-                    rel="noopener"
-                    className="btn-swiss-primary"
-                    style={{ padding: '0.75rem 1.5rem', fontSize: '0.9rem' }}
-                  >
-                    Visit Website <ExternalLink size={16} />
-                  </a>
-                )}
+                <a
+                  href={product.link}
+                  target="_blank"
+                  rel="noopener"
+                  className="btn-swiss-primary"
+                  style={{ padding: '0.75rem 1.5rem', fontSize: '0.9rem' }}
+                >
+                  Visit Website <ExternalLink size={16} />
+                </a>
 
                 <div className="upvote-badge" style={{ flexDirection: 'row', gap: '6px', minWidth: 'auto', padding: '0.65rem 1.25rem' }}>
                   <ChevronUp size={16} />
@@ -212,12 +201,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   <SafeImage
                     src={product.maker.avatar}
                     alt={product.maker.name}
-                    fallbackText={product.maker.name?.charAt(0) || 'M'}
+                    fallbackText={product.maker.name.charAt(0)}
                     className="maker-avatar"
                     style={{ width: '24px', height: '24px' }}
                   />
                   <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>
-                    {product.maker.name} {product.maker.username ? `(@${product.maker.username})` : ''}
+                    {product.maker.name} (@{product.maker.username})
                   </span>
                 </div>
               </div>
@@ -230,11 +219,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </div>
             )}
 
-            {tags.length > 0 && (
+            {product.tags && product.tags.length > 0 && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span className="swiss-label" style={{ width: '100px' }}>Tags:</span>
                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                  {tags.map((tag) => (
+                  {product.tags.map((tag) => (
                     <span key={tag} className="chip" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem' }}>
                       #{tag}
                     </span>
@@ -243,11 +232,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </div>
             )}
 
-            {techStack.length > 0 && (
+            {product.techStack && product.techStack.length > 0 && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span className="swiss-label" style={{ width: '100px' }}>Tech Stack:</span>
                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                  {techStack.map((tech) => (
+                  {product.techStack.map((tech) => (
                     <span key={tech} className="chip" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderColor: 'var(--border-bright)' }}>
                       {tech}
                     </span>
