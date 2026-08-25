@@ -1221,3 +1221,310 @@ a {
   opacity: 0.85;
 }
 
+/* ==========================================================================
+   Landing Page Additional Sections (Features, Bento Grid, Process, Launch CTA)
+   ========================================================================== */
+.landing-additional-sections {
+  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.section-title-wrap {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
+
+.section-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.landing-section-heading {
+  font-size: clamp(24px, 2.5vw, 34px);
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.landing-section-sub {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.landing-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 860px) {
+  .landing-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bento-feature-card {
+  background: linear-gradient(180deg, #16161b 0%, #0e0e12 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-feature-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(230, 57, 70, 0.4);
+}
+
+.bento-feature-card.span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 860px) {
+  .bento-feature-card.span-2 {
+    grid-column: span 1;
+  }
+}
+
+.bento-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.bento-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bento-icon-box.red { background-color: rgba(230, 57, 70, 0.15); color: var(--swiss-red); }
+.bento-icon-box.stone { background-color: rgba(168, 162, 158, 0.15); color: #d6d3d1; }
+.bento-icon-box.amber { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.bento-icon-box.purple { background-color: rgba(168, 85, 247, 0.15); color: #a855f7; }
+
+.bento-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background-color: var(--bg-surface-hover);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.bento-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.bento-card-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.bento-metric-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.metric-pill {
+  display: flex;
+  flex-direction: column;
+  background-color: #09090b;
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.pill-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--swiss-red);
+}
+
+.pill-lbl {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.bento-check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.bento-tag-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag-chip {
+  font-size: 11.5px;
+  background-color: #09090b;
+  border: 1px solid var(--border-color);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  color: var(--text-secondary);
+}
+
+/* Process Steps Grid */
+.process-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 860px) {
+  .process-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.process-step-card {
+  background: linear-gradient(180deg, #16161b 0%, #0e0e12 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.step-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--swiss-red);
+  opacity: 0.4;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Launch CTA Banner */
+.landing-launch-cta {
+  background: linear-gradient(135deg, #1f0d11 0%, #0d0608 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(230, 57, 70, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+}
+
+.launch-cta-content {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.launch-cta-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--swiss-red);
+  margin-bottom: 0.5rem;
+}
+
+.launch-cta-heading {
+  font-size: clamp(22px, 2.5vw, 32px);
+  line-height: 1.2;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.launch-cta-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.launch-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.launch-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--swiss-red);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.launch-cta-primary:hover {
+  background-color: var(--swiss-red-hover);
+  transform: translateY(-1px);
+}
+
+.launch-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-surface);
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  transition: all 0.15s ease;
+}
+
+.launch-cta-secondary:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+

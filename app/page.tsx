@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { getProducts } from '@/lib/ads';
 import { HeroSection } from '@/components/HeroSection';
+import { LandingSections } from '@/components/LandingSections';
 import { CategoryChips } from '@/components/CategoryChips';
 import { ProductListWithPagination } from '@/components/ProductListWithPagination';
 import { Sidebar } from '@/components/Sidebar';
@@ -29,6 +30,7 @@ export default function HomePage() {
       <div className="main-layout">
         <section>
           <CategoryChips />
+
           <div className="section-header">
             <div>
               <h2 className="section-title">Today's Launches</h2>
@@ -37,15 +39,19 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+
           <Suspense fallback={<ProductListSkeleton count={4} />}>
             <LaunchesFeed />
           </Suspense>
         </section>
+
         <Suspense fallback={<SidebarSkeleton />}>
           <Sidebar />
         </Suspense>
       </div>
+      <LandingSections />
     </div>
   );
 }
+
 
