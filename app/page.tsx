@@ -6,9 +6,11 @@ export const revalidate = 0;
 
 export default function HomePage() {
   return (
-    <div className="container">
+    <div className="w-full">
       <HeroSection />
-      <LandingSections />
+      <div className="container">
+        <LandingSections />
+      </div>
     </div>
   );
 }
