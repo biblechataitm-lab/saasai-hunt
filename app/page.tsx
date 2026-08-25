@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { getProducts } from '@/lib/ads';
+import { HeroSection } from '@/components/HeroSection';
 import { CategoryChips } from '@/components/CategoryChips';
 import { ProductListWithPagination } from '@/components/ProductListWithPagination';
 import { Sidebar } from '@/components/Sidebar';
@@ -16,7 +17,7 @@ async function LaunchesFeed() {
       initialNextCursor={nextCursor}
       fetchOptions={{ sort: 'new' }}
       emptyTitle="No Launches Today"
-      emptyDescription="No SaaS products have launched on this directory today yet. Check back soon or submit a product!"
+      emptyDescription="No products have launched on this directory today yet. Be the first to launch one!"
     />
   );
 }
@@ -25,13 +26,14 @@ export default function HomePage() {
   return (
     <div className="container main-layout">
       <section>
+        <HeroSection />
         <CategoryChips />
 
         <div className="section-header">
           <div>
-            <h1 className="section-title">Today's Launches</h1>
+            <h2 className="section-title">Today's Launches</h2>
             <p className="section-subtitle">
-              Discover the latest SaaS tools and software launched today
+              Discover the newest B2B SaaS tools and enterprise software
             </p>
           </div>
         </div>

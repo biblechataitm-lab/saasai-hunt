@@ -6,7 +6,7 @@
  * in a browser with the API key in hand.
  */
 
-export const DEFAULT_TIMEOUT_MS = 2000;
+export const DEFAULT_TIMEOUT_MS = 8000;
 
 export class BrowserCallError extends Error {}
 
