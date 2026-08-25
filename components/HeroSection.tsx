@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Layers, TrendingUp, ShieldCheck, Star, Users, ArrowUpRight, Search, Zap, CheckCircle2, Sparkles, Building2 } from 'lucide-react';
+import { Layers, TrendingUp, ShieldCheck, Star, Users, ArrowRight, ArrowUpRight, Search, Zap, CheckCircle2, Sparkles, Building2 } from 'lucide-react';
 
 const B2B_SHOWCASE = [
   {
@@ -42,12 +42,15 @@ export function HeroSection() {
 
   return (
     <section className="saashunt-hero">
+      <div className="saashunt-ambient-glow" />
+
       <div className="saashunt-hero-grid">
         {/* Left: Enterprise B2B Value Proposition */}
         <div className="saashunt-hero-content">
           <div className="saashunt-badge">
             <span className="saashunt-badge-dot" />
             <span>Curated Enterprise B2B SaaS & AI Co-Pilots • 2026</span>
+            <span className="saashunt-badge-pill">B2B VERIFIED</span>
           </div>
 
           <h1 className="saashunt-title">
@@ -80,6 +83,35 @@ export function HeroSection() {
               Explore SaaS
             </button>
           </form>
+
+          {/* Dual Action CTAs */}
+          <div className="saashunt-cta-row">
+            <Link href="/category/ai" className="saashunt-primary-btn">
+              Explore 2,900+ B2B Platforms <ArrowRight size={15} />
+            </Link>
+            <Link href="/submit" className="saashunt-secondary-btn">
+              Launch Your SaaS
+            </Link>
+          </div>
+
+          {/* Social Proof */}
+          <div className="saashunt-social-proof">
+            <div className="saashunt-avatar-stack">
+              <span className="saas-avatar av-1">💼</span>
+              <span className="saas-avatar av-2">📈</span>
+              <span className="saas-avatar av-3">⚡</span>
+              <span className="saas-avatar av-4">✨</span>
+            </div>
+            <div className="saashunt-proof-text">
+              <div className="saashunt-proof-stars">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={12} className="fill-amber-400 text-amber-400" />
+                ))}
+                <span className="saashunt-rating">4.9/5.0</span>
+              </div>
+              <span className="saashunt-subtext">Trusted by 84,000+ SaaS founders & enterprise buyers</span>
+            </div>
+          </div>
 
           {/* Category Chips */}
           <div className="saashunt-tags-row">
