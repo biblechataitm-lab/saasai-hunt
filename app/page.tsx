@@ -24,28 +24,28 @@ async function LaunchesFeed() {
 
 export default function HomePage() {
   return (
-    <div className="container main-layout">
-      <section>
-        <HeroSection />
-        <CategoryChips />
-
-        <div className="section-header">
-          <div>
-            <h2 className="section-title">Today's Launches</h2>
-            <p className="section-subtitle">
-              Discover the newest B2B SaaS tools and enterprise software
-            </p>
+    <div className="container">
+      <HeroSection />
+      <div className="main-layout">
+        <section>
+          <CategoryChips />
+          <div className="section-header">
+            <div>
+              <h2 className="section-title">Today's Launches</h2>
+              <p className="section-subtitle">
+                Discover the newest B2B SaaS tools and enterprise software
+              </p>
+            </div>
           </div>
-        </div>
-
-        <Suspense fallback={<ProductListSkeleton count={4} />}>
-          <LaunchesFeed />
+          <Suspense fallback={<ProductListSkeleton count={4} />}>
+            <LaunchesFeed />
+          </Suspense>
+        </section>
+        <Suspense fallback={<SidebarSkeleton />}>
+          <Sidebar />
         </Suspense>
-      </section>
-
-      <Suspense fallback={<SidebarSkeleton />}>
-        <Sidebar />
-      </Suspense>
+      </div>
     </div>
   );
 }
+
