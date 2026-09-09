@@ -1,21 +1,15 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { ExternalLink, ChevronUp, Clock } from 'lucide-react';
 import type { Product } from '@/lib/ads';
 import { SafeImage } from '@/components/SafeImage';
 
 export function ProductCard({ product }: { product: Product }) {
-  const router = useRouter();
-
   const handleCardClick = (e: React.MouseEvent) => {
-    // Prevent navigation if the user clicked an interactive anchor/button
     const target = e.target as HTMLElement;
-    if (target.closest('a') || target.closest('button')) {
-      return;
-    }
-    router.push(`/product/${encodeURIComponent(product.id)}`);
+    if (target.closest('a') || target.closest('button')) return;
+    window.location.href = `/product/${encodeURIComponent(product.id)}`;
   };
 
   const formattedDate = product.launchedAt
@@ -26,12 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
     : null;
 
   return (
-    <div
-      onClick={handleCardClick}
-      className="product-card"
-      style={{ cursor: 'pointer' }}
-    >
-      {/* Logo with safe image fallback */}
+    <div onClick={handleCardClick} className="product-card" style={{ cursor: 'pointer' }}>
       <SafeImage
         src={product.logo || ''}
         alt={product.title}
@@ -39,7 +28,6 @@ export function ProductCard({ product }: { product: Product }) {
         className="product-logo"
       />
 
-      {/* Content */}
       <div className="product-content">
         <div className="product-header-row">
           <div className="product-title-group">
@@ -51,15 +39,13 @@ export function ProductCard({ product }: { product: Product }) {
               onClick={(e) => e.stopPropagation()}
             >
               {product.title}
-              <ExternalLink className="external-link-icon" size={14} />
+              <ExternalLink size={14} style={{ color: 'var(--text-muted, var(--color-muted, #888))' }} />
             </a>
-            {product.category && (
-              <span className="category-badge">{product.category}</span>
-            )}
+            {product.category && <span className="category-badge">{product.category}</span>}
           </div>
 
           <div className="upvote-badge">
-            <ChevronUp className="upvote-icon" size={14} />
+            <ChevronUp size={14} style={{ color: 'var(--color-primary)' }} />
             <span>{product.upvotes ?? 0}</span>
           </div>
         </div>

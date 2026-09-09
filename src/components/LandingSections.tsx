@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { Layers, TrendingUp, ShieldCheck, ArrowRight, CheckCircle2, DollarSign, Building2, Sparkles, BarChart3, Zap } from 'lucide-react';
 
 export function LandingSections() {
@@ -150,12 +149,12 @@ export function LandingSections() {
             Acquire high-LTV customers, get listed in enterprise buying guides, and accelerate your monthly recurring revenue.
           </p>
           <div className="launch-cta-buttons">
-            <Link href="/submit" className="launch-cta-primary">
+            <a href="/submit" className="launch-cta-primary">
               Launch Your SaaS <ArrowRight size={15} />
-            </Link>
-            <Link href="/category/ai" className="launch-cta-secondary">
+            </a>
+            <a href="/category/ai" className="launch-cta-secondary">
               Explore B2B Index
-            </Link>
+            </a>
           </div>
         </div>
       </section>

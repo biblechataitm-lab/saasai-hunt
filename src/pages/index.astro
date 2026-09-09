@@ -1,18 +1,55 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { HeroLanding } from '@/components/landing/HeroLanding';
+import { CategoryChips } from '@/components/CategoryChips';
+import { ProductListWithPagination } from '@/components/ProductListWithPagination';
+import Sidebar from '@/components/Sidebar.astro';
 import { StatsSection } from '@/components/landing/StatsSection';
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { CTASection } from '@/components/landing/CTASection';
+import { getProducts, getSiteConfig } from '@/lib/ads';
 
 export const prerender = true;
+
+const config = await getSiteConfig();
+const siteName = config?.name || 'Directory';
+const { products, nextCursor } = await getProducts();
 ---
 
-<Layout title="SaaSAI Hunt — The #1 SaaS Product Discovery Platform" description="Explore 1,500+ curated SaaS products — from AI-powered platforms and no-code builders to analytics dashboards and team collaboration tools.">
-  <div class="saas-landing">
+<Layout title={`${siteName} — Discover the Best Tools & Products`} description={`The premier curated directory for discovering top-tier tools, platforms, and software on ${siteName}.`}>
+  <div class="site-landing-flow">
+    <!-- Hero Section (Unique MotionSites design for this portal) -->
     <HeroLanding client:load />
-    <StatsSection client:visible />
+
+    <!-- Live Directory Section (Category Chips + Product Feed + Sidebar) -->
+    <section class="home-directory-section" id="directory">
+      <div class="container main-layout">
+        <div class="directory-main-col">
+          <CategoryChips client:load />
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Trending & Featured Launches</h2>
+              <p class="section-subtitle">Curated daily by developers, founders, and makers</p>
+            </div>
+          </div>
+          <ProductListWithPagination
+            client:load
+            initialProducts={products}
+            initialNextCursor={nextCursor}
+            emptyTitle="No products listed yet"
+          />
+        </div>
+        <Sidebar />
+      </div>
+    </section>
+
+    <!-- Bento Features Section -->
     <FeaturesSection client:visible />
+
+    <!-- Traction / Stats Section -->
+    <StatsSection client:visible />
+
+    <!-- Launch CTA Section -->
     <CTASection client:visible />
   </div>
 </Layout>

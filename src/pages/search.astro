@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import { CategoryChips } from '@/components/CategoryChips';
 import { ProductListWithPagination } from '@/components/ProductListWithPagination';
-import { Sidebar } from '@/components/Sidebar';
+import Sidebar from '@/components/Sidebar.astro';
 import { getProducts } from '@/lib/ads';
 
 export const prerender = true;
@@ -26,6 +26,6 @@ const { products, nextCursor } = await getProducts();
         emptyTitle="No results found"
       />
     </section>
-    <Sidebar client:idle />
+    <Sidebar />
   </div>
 </Layout>

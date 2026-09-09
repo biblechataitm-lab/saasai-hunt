@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import { CategoryChips } from '@/components/CategoryChips';
 import { ProductListWithPagination } from '@/components/ProductListWithPagination';
-import { Sidebar } from '@/components/Sidebar';
+import Sidebar from '@/components/Sidebar.astro';
 import { getProducts } from '@/lib/ads';
 
 export async function getStaticPaths() {
@@ -35,6 +35,6 @@ const { products, nextCursor } = await getProducts({ category });
         emptyTitle={`No ${readable} Products Yet`}
       />
     </section>
-    <Sidebar client:idle />
+    <Sidebar />
   </div>
 </Layout>

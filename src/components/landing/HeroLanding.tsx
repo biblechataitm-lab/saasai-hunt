@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
 import { Search, ArrowRight, TrendingUp } from 'lucide-react';
 
 export function HeroLanding() {
@@ -53,12 +52,12 @@ export function HeroLanding() {
             <button type="submit">Explore <ArrowRight size={14} /></button>
           </form>
           <div className="saas-animate saas-hero-tags">
-            <Link href="/category/ai" className="saas-tag">AI SaaS</Link>
-            <Link href="/category/productivity" className="saas-tag">Productivity</Link>
-            <Link href="/category/developer-tools" className="saas-tag">Dev Platforms</Link>
-            <Link href="/trends" className="saas-tag saas-tag-hot">
+            <a href="/category/ai" className="saas-tag">AI SaaS</a>
+            <a href="/category/productivity" className="saas-tag">Productivity</a>
+            <a href="/category/developer-tools" className="saas-tag">Dev Platforms</a>
+            <a href="/trends" className="saas-tag saas-tag-hot">
               <TrendingUp size={12} /> Trending
-            </Link>
+            </a>
           </div>
         </div>
       </div>

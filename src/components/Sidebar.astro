@@ -1,0 +1,43 @@
+---
+import { getAd, AdSlot, getSiteConfig } from '@/lib/ads';
+import { Compass, Calendar, ArrowRight } from 'lucide-react';
+
+const config = await getSiteConfig();
+const siteName = config?.name || 'Directory';
+const slotKeys = config?.slots?.map((s) => s.key) ?? ['sidebar-1'];
+const primarySlot = slotKeys[0] || 'sidebar-1';
+const ad = await getAd({ slot: primarySlot });
+---
+
+<aside>
+  <div class="sidebar-card">
+    <div class="sidebar-card-title">
+      <span style="display: inline-flex; align-items: center; gap: 6px;">
+        <Compass size={14} style={{ color: 'var(--color-primary)' }} /> About {siteName}
+      </span>
+    </div>
+    <p class="sidebar-card-body">
+      {siteName} is an independent curated launch directory listing premier tools, software, and developer platforms in the ecosystem.
+    </p>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="sidebar-card-title">
+      <span style="display: inline-flex; align-items: center; gap: 6px;">
+        <Calendar size={14} style={{ color: 'var(--color-primary)' }} /> Curated Collections
+      </span>
+    </div>
+    <div style="margin-top: 0.5rem;">
+      <a href="/collections/this-week" class="collection-link">
+        <span>This Week's Top Picks</span>
+        <ArrowRight size={14} style={{ color: 'var(--color-muted, #888)' }} />
+      </a>
+      <a href="/collections/this-month" class="collection-link">
+        <span>This Month's Top Picks</span>
+        <ArrowRight size={14} style={{ color: 'var(--color-muted, #888)' }} />
+      </a>
+    </div>
+  </div>
+
+  {ad && <AdSlot ad={ad} client:load />}
+</aside>

@@ -1,36 +1,45 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 
 const CATEGORIES = [
-  { name: 'All', path: '/' },
-  { name: 'SaaS', path: '/category/saas' },
-  { name: 'AI', path: '/category/ai' },
-  { name: 'Developer Tools', path: '/category/developer-tools' },
-  { name: 'E-commerce', path: '/category/e-commerce' },
-  { name: 'Productivity', path: '/category/productivity' },
-  { name: 'Marketing', path: '/category/marketing' },
+  { label: 'All', path: '/' },
+  { label: 'AI & ML', path: '/category/ai' },
+  { label: 'Developer Tools', path: '/category/developer-tools' },
+  { label: 'Productivity', path: '/category/productivity' },
+  { label: 'Search & Data', path: '/category/search-data' },
+  { label: 'Automation', path: '/category/automation' },
+  { label: 'Design & Media', path: '/category/design' },
 ];
 
 export function CategoryChips({ activeCategory }: { activeCategory?: string }) {
-  return (
-    <div className="category-bar">
-      {CATEGORIES.map((cat) => {
-        const isActive =
-          activeCategory === cat.name ||
-          (activeCategory === undefined && cat.path === '/');
+  const [currentPath, setCurrentPath] = useState('');
 
-        return (
-          <Link
-            key={cat.name}
-            href={cat.path}
-            className={`chip ${isActive ? 'active' : ''}`}
-          >
-            {cat.name}
-          </Link>
-        );
-      })}
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentPath(window.location.pathname);
+    }
+  }, []);
+
+  return (
+    <div className="category-chips-wrapper">
+      <div className="category-chips-list">
+        {CATEGORIES.map((cat) => {
+          const isActive = activeCategory
+            ? cat.path.toLowerCase() === `/category/${activeCategory.toLowerCase()}`
+            : currentPath === cat.path || (cat.path === '/' && (currentPath === '' || currentPath === '/'));
+
+          return (
+            <a
+              key={cat.path}
+              href={cat.path}
+              className={`category-chip ${isActive ? 'active' : ''}`}
+            >
+              {cat.label}
+            </a>
+          );
+        })}
+      </div>
     </div>
   );
 }
