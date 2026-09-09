@@ -1,16 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { HeroSection } from '@/components/HeroSection';
-import { LandingSections } from '@/components/LandingSections';
+import { HeroLanding } from '@/components/landing/HeroLanding';
+import { StatsSection } from '@/components/landing/StatsSection';
+import { FeaturesSection } from '@/components/landing/FeaturesSection';
+import { CTASection } from '@/components/landing/CTASection';
 
 export const prerender = true;
 ---
 
-<Layout>
-  <div class="w-full">
-    <HeroSection client:load />
-    <div class="container">
-      <LandingSections client:visible />
-    </div>
+<Layout title="SaaSAI Hunt — The #1 SaaS Product Discovery Platform" description="Explore 1,500+ curated SaaS products — from AI-powered platforms and no-code builders to analytics dashboards and team collaboration tools.">
+  <div class="saas-landing">
+    <HeroLanding client:load />
+    <StatsSection client:visible />
+    <FeaturesSection client:visible />
+    <CTASection client:visible />
   </div>
 </Layout>
