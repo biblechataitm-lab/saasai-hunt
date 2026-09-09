@@ -3,38 +3,42 @@ import Layout from '@/layouts/Layout.astro';
 import { CategoryChips } from '@/components/CategoryChips';
 import { ProductListWithPagination } from '@/components/ProductListWithPagination';
 import Sidebar from '@/components/Sidebar.astro';
-import { getProducts } from '@/lib/ads';
+import { getProducts, getSiteConfig } from '@/lib/ads';
 
 export async function getStaticPaths() {
-  const categories = ["saas","ai","developer-tools","e-commerce","productivity","marketing"];
+  const categories = ["saas","ai","developer-tools","productivity","marketing","e-commerce","search-data","automation","design","email","react","links","analytics","calendar","scheduling","open-source","crm","sales","data","product","session-replay","launcher","macos"];
   return categories.map((cat) => ({
     params: { category: cat },
   }));
 }
 
+const config = await getSiteConfig();
+const siteName = config?.name || 'saasai-hunt';
 const { category } = Astro.params;
 const readable = (category || '').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 const { products, nextCursor } = await getProducts({ category });
 ---
 
-<Layout title={`${readable} Tools — SaaSHunt`}>
-  <div class="container main-layout">
-    <section>
-      <CategoryChips client:load activeCategory={category} />
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">{readable}</h1>
-          <p class="section-subtitle">Top curated {readable.toLowerCase()} software</p>
+<Layout title={`${readable} Tools — ${siteName}`} description={`Curated ${readable.toLowerCase()} tools and software on ${siteName}.`}>
+  <div class="site-main-offset">
+    <div class="container main-layout">
+      <section class="directory-main-col">
+        <CategoryChips client:load activeCategory={category} />
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">{readable}</h1>
+            <p class="section-subtitle">Top curated {readable.toLowerCase()} software and services</p>
+          </div>
         </div>
-      </div>
-      <ProductListWithPagination
-        client:load
-        initialProducts={products}
-        initialNextCursor={nextCursor}
-        fetchOptions={{ category }}
-        emptyTitle={`No ${readable} Products Yet`}
-      />
-    </section>
-    <Sidebar />
+        <ProductListWithPagination
+          client:load
+          initialProducts={products}
+          initialNextCursor={nextCursor}
+          fetchOptions={{ category }}
+          emptyTitle={`No ${readable} Products Found`}
+        />
+      </section>
+      <Sidebar />
+    </div>
   </div>
 </Layout>
