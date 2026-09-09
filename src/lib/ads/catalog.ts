@@ -13,55 +13,139 @@ import { request, mockMode } from './client';
 
 const MOCK_PRODUCTS: Product[] = [
   {
-    id: 'mock-1',
-    title: 'Prime Agent',
-    tagline: 'An open-source, self-improving coding harness',
-    description: 'Built around two abstractions: the Recursive Language Model and the Continual Harness.',
-    logo: 'https://placehold.co/96x96/1e293b/94a3b8?text=PA',
-    link: 'https://example.com/prime-agent',
-    category: 'AI',
-    tags: ['ai', 'developer-tools'],
-    techStack: ['TypeScript', 'Python'],
-    coverImages: [],
-    upvotes: 128,
-    launchedAt: new Date(Date.now() - 2 * 86400000).toISOString(),
-    maker: { name: 'Ada Reyes', username: 'ada', avatar: 'https://placehold.co/64x64/334155/cbd5e1?text=A' },
+    "id": "sah-1",
+    "title": "Resend",
+    "tagline": "Email for developers with clean modern APIs, high deliverability, and React Email components",
+    "link": "https://resend.com",
+    "category": "Developer Tools",
+    "upvotes": 510,
+    "tags": [
+      "email",
+      "developer-tools",
+      "react"
+    ],
+    "techStack": [
+      "Next.js",
+      "React Email",
+      "AWS SES"
+    ],
+    "maker": {
+      "name": "Zeno Rocha",
+      "avatar": "https://placehold.co/64x64/e63946/ffffff?text=RS"
+    }
   },
   {
-    id: 'mock-2',
-    title: 'Paritok',
-    tagline: 'Compress the tools, files and history your coding agent sends',
-    description: 'Save up to 85% on your token bill and run 3x longer sessions.',
-    logo: 'https://placehold.co/96x96/1e293b/94a3b8?text=PT',
-    link: 'https://example.com/paritok',
-    category: 'AI',
-    tags: ['ai'],
-    techStack: ['Rust'],
-    coverImages: [],
-    upvotes: 74,
-    launchedAt: new Date(Date.now() - 5 * 86400000).toISOString(),
-    maker: { name: 'Ken Obi', username: 'ken', avatar: 'https://placehold.co/64x64/334155/cbd5e1?text=K' },
+    "id": "sah-2",
+    "title": "Dub.co",
+    "tagline": "The modern open-source link management engine with custom domains and conversion analytics",
+    "link": "https://dub.co",
+    "category": "Automation",
+    "upvotes": 460,
+    "tags": [
+      "links",
+      "analytics",
+      "marketing"
+    ],
+    "techStack": [
+      "Next.js",
+      "Upstash",
+      "Tailwind"
+    ],
+    "maker": {
+      "name": "Steven Tey",
+      "avatar": "https://placehold.co/64x64/3b82f6/ffffff?text=DB"
+    }
   },
   {
-    id: 'mock-3',
-    title: 'OmniBiz POS',
-    tagline: 'POS, inventory, QR ordering and billing in one platform',
-    description: 'Manage customer orders, reservations and multiple stores from one place.',
-    logo: 'https://placehold.co/96x96/1e293b/94a3b8?text=OB',
-    link: 'https://example.com/omnibiz',
-    category: 'E-commerce',
-    tags: ['saas', 'e-commerce'],
-    techStack: ['Next.js'],
-    coverImages: [],
-    upvotes: 31,
-    launchedAt: new Date(Date.now() - 9 * 86400000).toISOString(),
-    maker: null,
+    "id": "sah-3",
+    "title": "Cal.com",
+    "tagline": "Open-source scheduling infrastructure giving developers complete control over booking flows",
+    "link": "https://cal.com",
+    "category": "Automation",
+    "upvotes": 430,
+    "tags": [
+      "calendar",
+      "scheduling",
+      "open-source"
+    ],
+    "techStack": [
+      "TypeScript",
+      "Prisma"
+    ],
+    "maker": {
+      "name": "Peer Richelsen",
+      "avatar": "https://placehold.co/64x64/10b981/ffffff?text=CC"
+    }
   },
+  {
+    "id": "sah-4",
+    "title": "Attio CRM",
+    "tagline": "The next-generation customizable CRM built on a real-time collaborative database engine",
+    "link": "https://attio.com",
+    "category": "Productivity",
+    "upvotes": 390,
+    "tags": [
+      "crm",
+      "sales",
+      "data"
+    ],
+    "techStack": [
+      "React",
+      "Rust",
+      "Postgres"
+    ],
+    "maker": {
+      "name": "Nicolas Sharpe",
+      "avatar": "https://placehold.co/64x64/a78bfa/ffffff?text=AT"
+    }
+  },
+  {
+    "id": "sah-5",
+    "title": "PostHog",
+    "tagline": "Product analytics, session replay, feature flags, and survey tools built for engineering teams",
+    "link": "https://posthog.com",
+    "category": "Search & Data",
+    "upvotes": 370,
+    "tags": [
+      "analytics",
+      "product",
+      "session-replay"
+    ],
+    "techStack": [
+      "Python",
+      "ClickHouse"
+    ],
+    "maker": {
+      "name": "James Hawkins",
+      "avatar": "https://placehold.co/64x64/ec4899/ffffff?text=PH"
+    }
+  },
+  {
+    "id": "sah-6",
+    "title": "Raycast",
+    "tagline": "Extensible productivity launcher for Mac with custom scripting and developer integrations",
+    "link": "https://raycast.com",
+    "category": "Productivity",
+    "upvotes": 340,
+    "tags": [
+      "launcher",
+      "productivity",
+      "macos"
+    ],
+    "techStack": [
+      "Swift",
+      "TypeScript"
+    ],
+    "maker": {
+      "name": "Thomas Paul Mann",
+      "avatar": "https://placehold.co/64x64/f59e0b/ffffff?text=RC"
+    }
+  }
 ];
 
 const MOCK_SITE: SiteConfig = {
   key: 'mock-site',
-  name: 'Mock Directory',
+  name: 'SaaSAI Hunt',
   domain: 'example.com',
   category: 'tech',
   tags: ['ai', 'saas'],

@@ -4,52 +4,52 @@ import { HeroLanding } from '@/components/landing/HeroLanding';
 import { CategoryChips } from '@/components/CategoryChips';
 import { ProductListWithPagination } from '@/components/ProductListWithPagination';
 import Sidebar from '@/components/Sidebar.astro';
-import { StatsSection } from '@/components/landing/StatsSection';
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
+import { StatsSection } from '@/components/landing/StatsSection';
 import { CTASection } from '@/components/landing/CTASection';
 import { getProducts, getSiteConfig } from '@/lib/ads';
 
 export const prerender = true;
 
 const config = await getSiteConfig();
-const siteName = config?.name || 'Directory';
+const siteName = config?.name || 'SaaSAI Hunt';
 const { products, nextCursor } = await getProducts();
 ---
 
-<Layout title={`${siteName} — Discover the Best Tools & Products`} description={`The premier curated directory for discovering top-tier tools, platforms, and software on ${siteName}.`}>
-  <div class="site-landing-flow">
-    <!-- Hero Section (Unique MotionSites design for this portal) -->
+<Layout title="SaaSAI Hunt — Swiss Curated Software & Micro-SaaS Directory" description="The minimalist Swiss-designed directory for privacy-first SaaS, developer tools, and micro-software.">
+  <div class="theme-saasai">
+    <!-- Bespoke MotionSites Hero -->
     <HeroLanding client:load />
 
-    <!-- Live Directory Section (Category Chips + Product Feed + Sidebar) -->
+    <!-- Live Niche Directory Section -->
     <section class="home-directory-section" id="directory">
       <div class="container main-layout">
         <div class="directory-main-col">
           <CategoryChips client:load />
           <div class="section-header">
             <div>
-              <h2 class="section-title">Trending & Featured Launches</h2>
-              <p class="section-subtitle">Curated daily by developers, founders, and makers</p>
+              <h2 class="section-title">Trending &amp; Featured on SaaSAI Hunt</h2>
+              <p class="section-subtitle">The minimalist Swiss-designed directory for privacy-first SaaS, developer tools, and micro-software.</p>
             </div>
           </div>
           <ProductListWithPagination
             client:load
             initialProducts={products}
             initialNextCursor={nextCursor}
-            emptyTitle="No products listed yet"
+            emptyTitle="No tools found"
           />
         </div>
         <Sidebar />
       </div>
     </section>
 
-    <!-- Bento Features Section -->
+    <!-- Bespoke Niche Features Section -->
     <FeaturesSection client:visible />
 
-    <!-- Traction / Stats Section -->
+    <!-- Traction Stats Counter -->
     <StatsSection client:visible />
 
-    <!-- Launch CTA Section -->
+    <!-- Launch CTA -->
     <CTASection client:visible />
   </div>
 </Layout>

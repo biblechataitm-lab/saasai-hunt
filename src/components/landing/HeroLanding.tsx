@@ -1,66 +1,30 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import { Search, ArrowRight, TrendingUp } from 'lucide-react';
+import React from 'react';
 
 export function HeroLanding() {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero) return;
-    const children = hero.querySelectorAll('.saas-animate');
-    children.forEach((el, i) => {
-      const htmlEl = el as HTMLElement;
-      htmlEl.style.opacity = '0';
-      htmlEl.style.transform = 'translateY(24px)';
-      setTimeout(() => {
-        htmlEl.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        htmlEl.style.opacity = '1';
-        htmlEl.style.transform = 'translateY(0)';
-      }, 100 + i * 100);
-    });
-  }, []);
-
   return (
-    <section ref={heroRef} className="saas-hero">
-      <div className="saas-hero-bg" aria-hidden="true" />
-      <div className="saas-hero-container">
-        <div className="saas-hero-content">
-          <div className="saas-animate saas-hero-badge">
-            <span>The #1 SaaS Product Discovery Platform</span>
-          </div>
-          <h1 className="saas-animate saas-hero-title">
-            Discover SaaS Products That{' '}
-            <span className="saas-accent-text">Actually Ship</span>
-          </h1>
-          <p className="saas-animate saas-hero-subtitle">
-            Explore 1,500+ curated SaaS products — from AI-powered platforms and no-code builders to analytics dashboards and team collaboration tools.
-          </p>
-          <form
-            className="saas-animate saas-hero-search"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const input = e.currentTarget.querySelector('input');
-              if (input?.value.trim()) {
-                window.location.href = `/search?q=${encodeURIComponent(input.value.trim())}`;
-              }
-            }}
-          >
-            <Search size={16} className="saas-hero-search-icon" />
-            <input type="text" placeholder="Search SaaS products, platforms..." />
-            <button type="submit">Explore <ArrowRight size={14} /></button>
-          </form>
-          <div className="saas-animate saas-hero-tags">
-            <a href="/category/ai" className="saas-tag">AI SaaS</a>
-            <a href="/category/productivity" className="saas-tag">Productivity</a>
-            <a href="/category/developer-tools" className="saas-tag">Dev Platforms</a>
-            <a href="/trends" className="saas-tag saas-tag-hot">
-              <TrendingUp size={12} /> Trending
-            </a>
-          </div>
-        </div>
+    <section class="swiss-hero">
+  <div class="swiss-container container">
+    <div class="swiss-grid-meta">
+      <span class="swiss-num">01 / ARCHIVE</span>
+      <span class="swiss-red-badge">INTERNATIONAL STYLE</span>
+      <span class="swiss-curation">STRICT CURATION</span>
+    </div>
+    <div class="swiss-hero-box">
+      <div class="swiss-accent-bar"></div>
+      <h1 class="swiss-title">
+        SWISS DISPATCH: <br/><span class="swiss-red-text">SAAS &amp; SOFTWARE</span>
+      </h1>
+      <p class="swiss-desc">
+        A minimalist directory built on rigorous typographic hierarchy, zero-tracking privacy, and verified product makers.
+      </p>
+      <div class="swiss-search-wrap">
+        <input type="text" placeholder="FILTER ARCHIVE [RESEND, DUB, CAL]..." class="swiss-input" />
+        <button class="swiss-search-btn">INDEX</button>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
   );
 }
