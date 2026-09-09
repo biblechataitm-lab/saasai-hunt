@@ -7,6 +7,7 @@ import '@/styles/globals.css';
 interface Props {
   title?: string;
   description?: string;
+  isHome?: boolean;
 }
 
 const { title, description } = Astro.props;
@@ -14,6 +15,8 @@ const config = await getSiteConfig();
 const siteName = config?.name || 'SaaSHunt';
 const pageTitle = title || `${siteName} — Curated Directory`;
 const pageDescription = description || `The curated directory on ${siteName}`;
+const pathname = Astro.url.pathname;
+const isHome = Astro.props.isHome ?? (pathname === '/' || pathname === '');
 ---
 
 <!doctype html>
@@ -26,9 +29,10 @@ const pageDescription = description || `The curated directory on ${siteName}`;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body>
-    <div style="display: flex; flex-direction: column; min-height: 100vh;">
+    <div class="site-wrapper">
       <Header client:load siteName={siteName} />
-      <main style="flex: 1;">
+      <main class={`site-main ${!isHome ? "site-main-offset" : ""}`}>
+        
         <slot />
       </main>
       <Footer client:idle siteName={siteName} />
