@@ -1,0 +1,31 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { CategoryChips } from '@/components/CategoryChips';
+import { ProductListWithPagination } from '@/components/ProductListWithPagination';
+import { Sidebar } from '@/components/Sidebar';
+import { getProducts } from '@/lib/ads';
+
+export const prerender = true;
+const { products, nextCursor } = await getProducts();
+---
+
+<Layout title="Search Directory — SaaSHunt">
+  <div class="container main-layout">
+    <section>
+      <CategoryChips client:load />
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Search Directory</h1>
+          <p class="section-subtitle">Browsing results</p>
+        </div>
+      </div>
+      <ProductListWithPagination
+        client:load
+        initialProducts={products}
+        initialNextCursor={nextCursor}
+        emptyTitle="No results found"
+      />
+    </section>
+    <Sidebar client:idle />
+  </div>
+</Layout>

@@ -1,0 +1,91 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getProducts, getProduct, getAd, AdSlot, getSiteConfig } from '@/lib/ads';
+import { SafeImage } from '@/components/SafeImage';
+import { marked } from 'marked';
+import { ChevronUp, ExternalLink, ArrowLeft } from 'lucide-react';
+
+export async function getStaticPaths() {
+  const { products } = await getProducts({ limit: 100 });
+  return products.map((p) => ({
+    params: { id: p.id },
+  }));
+}
+
+const { id } = Astro.params;
+const product = await getProduct(id || '');
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+const config = await getSiteConfig();
+const slotKey = config?.slots?.[0]?.key || 'sidebar-1';
+const ad = await getAd({ slot: slotKey });
+
+const descriptionHtml = product.description ? await marked.parse(product.description) : '';
+---
+
+<Layout
+  title={`${product.title} — ${product.tagline} | SaaSHunt`}
+  description={product.description || product.tagline}
+>
+  <div class="container main-layout" style="padding-top: 2rem; padding-bottom: 4rem;">
+    <article>
+      <a href="/" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); margin-bottom: 1.5rem;">
+        <ArrowLeft size={16} /> Back to Directory
+      </a>
+
+      <div style="display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 2rem;">
+        <div style="width: 80px; height: 80px; flex-shrink: 0;">
+          <SafeImage
+            client:load
+            src={product.logo || ''}
+            alt={product.title}
+            fallbackText={product.title.slice(0, 2).toUpperCase()}
+            className="product-logo"
+          />
+        </div>
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+            <div>
+              <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">{product.title}</h1>
+              <p style="font-size: 1.15rem; color: var(--text-body); line-height: 1.5;">{product.tagline}</p>
+            </div>
+            <div class="upvote-badge" style="padding: 10px 16px; font-size: 15px;">
+              <ChevronUp size={18} color="var(--color-primary)" />
+              <span>{product.upvotes ?? 0}</span>
+            </div>
+          </div>
+          <div style="margin-top: 1.25rem; display: flex; gap: 1rem; align-items: center;">
+            <a href={product.link} target="_blank" rel="noopener noreferrer" class="btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; font-size: 14px;">
+              Visit Website <ExternalLink size={14} />
+            </a>
+            {product.category && <span class="category-badge">{product.category}</span>}
+          </div>
+        </div>
+      </div>
+
+      {descriptionHtml && (
+        <div class="product-description" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-body); line-height: 1.7;" set:html={descriptionHtml} />
+      )}
+    </article>
+
+    <aside>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Directory Info</div>
+        <div style="font-size: 0.85rem; color: var(--text-body);">
+          <div style="margin-bottom: 0.6rem;">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600;">Directory:</span>{' '}
+            <strong style="color: var(--text-ink);">{config?.name || 'SaaSHunt'}</strong>
+          </div>
+          <div>
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600;">Niche:</span>{' '}
+            <span style="color: var(--text-body);">{config?.tags?.join(', ') || 'directory'}</span>
+          </div>
+        </div>
+      </div>
+      <AdSlot client:idle ad={ad} />
+    </aside>
+  </div>
+</Layout>

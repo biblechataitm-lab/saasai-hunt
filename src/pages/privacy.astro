@@ -1,0 +1,17 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+export const prerender = true;
+---
+
+<Layout title="Privacy Policy — SaaSHunt">
+  <div class="container" style="max-width: 800px; padding-top: 3rem; padding-bottom: 5rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Privacy Policy</h1>
+    <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-main); padding: 2.5rem;" class="prose-body">
+      <h2>1. Privacy First</h2>
+      <p>SaaSHunt does not deploy invasive third-party tracking beacons, cross-site identity graphs, or cookie sync pixels.</p>
+      <h2 style="margin-top: 1.5rem;">2. First-Party Visitor Identity</h2>
+      <p>To prevent repetitive ad exposures, an anonymous first-party cookie (<code>plads_vid</code>) is stored locally.</p>
+    </div>
+  </div>
+</Layout>

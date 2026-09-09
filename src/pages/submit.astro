@@ -1,0 +1,52 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
+
+export const prerender = true;
+---
+
+<Layout title="Launch a Product — SaaSHunt">
+  <div class="container" style="max-width: 760px; padding-top: 3rem; padding-bottom: 5rem;">
+    <div style="margin-bottom: 2.5rem;">
+      <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-primary);">Submit a Tool</span>
+      <h1 style="font-size: 2.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">Launch on SaaSHunt</h1>
+      <p style="font-size: 1.15rem; color: var(--text-body); line-height: 1.6;">
+        Showcase your latest product or software to our active community.
+      </p>
+    </div>
+
+    <div class="sidebar-card" style="padding: 2rem; margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Submission Criteria</h2>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem;">
+        <li style="display: flex; gap: 0.75rem; align-items: center;">
+          <CheckCircle2 size={16} color="var(--color-primary)" />
+          <span style="color: var(--text-body); font-size: 14px;">Live public URL or functional beta.</span>
+        </li>
+        <li style="display: flex; gap: 0.75rem; align-items: center;">
+          <CheckCircle2 size={16} color="var(--color-primary)" />
+          <span style="color: var(--text-body); font-size: 14px;">Relevant to the SaaSHunt ecosystem.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-main); padding: 2rem;">
+      <form style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 6px;">Product Name</label>
+          <input type="text" placeholder="e.g. Acme Software" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-main); border: 1px solid var(--border-color); background-color: var(--bg-surface-soft); font-size: 14px; color: var(--text-ink); outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 6px;">Tagline</label>
+          <input type="text" placeholder="e.g. Modern platform" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-main); border: 1px solid var(--border-color); background-color: var(--bg-surface-soft); font-size: 14px; color: var(--text-ink); outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 6px;">Website URL</label>
+          <input type="url" placeholder="https://example.com" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-main); border: 1px solid var(--border-color); background-color: var(--bg-surface-soft); font-size: 14px; color: var(--text-ink); outline: none;" />
+        </div>
+        <button type="button" class="btn-primary" style="width: 100%; padding: 12px 20px; font-size: 15px; margin-top: 0.5rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <Sparkles size={16} /> Submit Product <ArrowRight size={16} />
+        </button>
+      </form>
+    </div>
+  </div>
+</Layout>

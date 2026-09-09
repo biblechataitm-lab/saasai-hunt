@@ -1,0 +1,20 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getSiteConfig } from '@/lib/ads';
+
+export const prerender = true;
+const config = await getSiteConfig();
+const siteName = config?.name || 'SaaSHunt';
+---
+
+<Layout title={`About — ${siteName}`}>
+  <div class="container" style="max-width: 800px; padding-top: 3rem; padding-bottom: 5rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">About {siteName}</h1>
+    <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-main); padding: 2.5rem;" class="prose-body">
+      <h2>Our Mission</h2>
+      <p>The curated directory showcasing genuine innovations built by makers and engineering teams worldwide.</p>
+      <h2 style="margin-top: 1.5rem;">Publisher Ad Network</h2>
+      <p>{siteName} is part of an independent publisher directory network delivering privacy-first, non-tracking native advertising.</p>
+    </div>
+  </div>
+</Layout>

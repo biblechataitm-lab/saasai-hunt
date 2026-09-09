@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { HeroSection } from '@/components/HeroSection';
+import { LandingSections } from '@/components/LandingSections';
+
+export const prerender = true;
+---
+
+<Layout>
+  <div class="w-full">
+    <HeroSection client:load />
+    <div class="container">
+      <LandingSections client:visible />
+    </div>
+  </div>
+</Layout>

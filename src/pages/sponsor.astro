@@ -1,0 +1,49 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getSiteConfig } from '@/lib/ads';
+import { ExternalLink, CheckCircle, ShieldCheck } from 'lucide-react';
+
+export const prerender = true;
+const config = await getSiteConfig();
+const siteName = config?.name || 'SaaSHunt';
+---
+
+<Layout title={`Sponsor & Advertise — ${siteName}`}>
+  <div class="container" style="max-width: 800px; padding-top: 3rem; padding-bottom: 5rem;">
+    <div style="margin-bottom: 2.5rem;">
+      <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-primary);">Sponsorships</span>
+      <h1 style="font-size: 2.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">Advertise on {siteName}</h1>
+      <p style="font-size: 1.15rem; color: var(--text-body); line-height: 1.6;">
+        Reach targeted buyers, engineers, and power users in this niche.
+      </p>
+    </div>
+
+    <div class="sidebar-card" style="padding: 2rem; margin-bottom: 2rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 1.25rem;">Why Sponsor {siteName}?</h2>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+          <CheckCircle size={18} color="var(--color-primary)" />
+          <span style="color: var(--text-body); font-size: 14.5px;"><strong>High Intent Readership:</strong> Visitors actively evaluating software.</span>
+        </li>
+        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+          <CheckCircle size={18} color="var(--color-primary)" />
+          <span style="color: var(--text-body); font-size: 14.5px;"><strong>Non-Intrusive Native Units:</strong> Seamless sidebar integrations with high organic CTR.</span>
+        </li>
+        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+          <ShieldCheck size={18} color="var(--color-primary)" />
+          <span style="color: var(--text-body); font-size: 14.5px;"><strong>Guaranteed 50% + 1s Viewability:</strong> Verified telemetry via Beacon events.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-main); padding: 2.5rem 2rem; textAlign: center;">
+      <h3 style="font-size: 1.4rem; margin-bottom: 0.75rem;">Book a Placement via Rate Card</h3>
+      <p style="color: var(--text-body); margin-bottom: 1.5rem; max-width: 480px; margin: 0 auto 1.5rem auto; font-size: 14px;">
+        Manage inventory centrally across the Publisher Ad Network.
+      </p>
+      <a href="https://peerlist.io" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 0.85rem 1.75rem; display: inline-flex; align-items: center; gap: 8px;">
+        View Rate Card & Book Slot <ExternalLink size={16} />
+      </a>
+    </div>
+  </div>
+</Layout>

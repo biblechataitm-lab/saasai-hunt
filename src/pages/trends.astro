@@ -1,0 +1,31 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { CategoryChips } from '@/components/CategoryChips';
+import { ProductListWithPagination } from '@/components/ProductListWithPagination';
+import { Sidebar } from '@/components/Sidebar';
+import { getProducts } from '@/lib/ads';
+
+export const prerender = true;
+const { products, nextCursor } = await getProducts({ sort: 'top' });
+---
+
+<Layout title="Trending — SaaSHunt">
+  <div class="container main-layout">
+    <section>
+      <CategoryChips client:load />
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Trending SaaSHunt Tools</h1>
+          <p class="section-subtitle">Most popular entries across the community</p>
+        </div>
+      </div>
+      <ProductListWithPagination
+        client:load
+        initialProducts={products}
+        initialNextCursor={nextCursor}
+        fetchOptions={{ sort: 'top' }}
+      />
+    </section>
+    <Sidebar client:idle />
+  </div>
+</Layout>

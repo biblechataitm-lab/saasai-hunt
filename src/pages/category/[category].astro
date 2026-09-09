@@ -1,0 +1,40 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { CategoryChips } from '@/components/CategoryChips';
+import { ProductListWithPagination } from '@/components/ProductListWithPagination';
+import { Sidebar } from '@/components/Sidebar';
+import { getProducts } from '@/lib/ads';
+
+export async function getStaticPaths() {
+  const categories = ["saas","ai","developer-tools","e-commerce","productivity","marketing"];
+  return categories.map((cat) => ({
+    params: { category: cat },
+  }));
+}
+
+const { category } = Astro.params;
+const readable = (category || '').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+const { products, nextCursor } = await getProducts({ category });
+---
+
+<Layout title={`${readable} Tools — SaaSHunt`}>
+  <div class="container main-layout">
+    <section>
+      <CategoryChips client:load activeCategory={category} />
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">{readable}</h1>
+          <p class="section-subtitle">Top curated {readable.toLowerCase()} software</p>
+        </div>
+      </div>
+      <ProductListWithPagination
+        client:load
+        initialProducts={products}
+        initialNextCursor={nextCursor}
+        fetchOptions={{ category }}
+        emptyTitle={`No ${readable} Products Yet`}
+      />
+    </section>
+    <Sidebar client:idle />
+  </div>
+</Layout>

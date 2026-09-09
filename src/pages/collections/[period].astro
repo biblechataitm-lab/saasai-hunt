@@ -1,0 +1,44 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { CategoryChips } from '@/components/CategoryChips';
+import { ProductListWithPagination } from '@/components/ProductListWithPagination';
+import { Sidebar } from '@/components/Sidebar';
+import { getProducts } from '@/lib/ads';
+
+export async function getStaticPaths() {
+  return [
+    { params: { period: 'this-week' } },
+    { params: { period: 'this-month' } },
+  ];
+}
+
+const { period } = Astro.params;
+const PERIOD_CONFIG: Record<string, { title: string; subtitle: string; since: string }> = {
+  'this-week': { title: "This Week's Top Picks", subtitle: 'Best launches from the past 7 days', since: 'week' },
+  'this-month': { title: "This Month's Top Picks", subtitle: 'Best launches from the past 30 days', since: 'month' },
+};
+
+const periodConfig = PERIOD_CONFIG[period || 'this-week'] || PERIOD_CONFIG['this-week'];
+const { products, nextCursor } = await getProducts({ since: periodConfig.since, sort: 'top' });
+---
+
+<Layout title={`${periodConfig.title} — SaaSHunt`}>
+  <div class="container main-layout">
+    <section>
+      <CategoryChips client:load />
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">{periodConfig.title}</h1>
+          <p class="section-subtitle">{periodConfig.subtitle}</p>
+        </div>
+      </div>
+      <ProductListWithPagination
+        client:load
+        initialProducts={products}
+        initialNextCursor={nextCursor}
+        fetchOptions={{ since: periodConfig.since, sort: 'top' }}
+      />
+    </section>
+    <Sidebar client:idle />
+  </div>
+</Layout>

@@ -1,0 +1,37 @@
+---
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { getSiteConfig } from '@/lib/ads';
+import '@/styles/globals.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const config = await getSiteConfig();
+const siteName = config?.name || 'SaaSHunt';
+const pageTitle = title || `${siteName} — Curated Directory`;
+const pageDescription = description || `The curated directory on ${siteName}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <div style="display: flex; flex-direction: column; min-height: 100vh;">
+      <Header client:load siteName={siteName} />
+      <main style="flex: 1;">
+        <slot />
+      </main>
+      <Footer client:idle siteName={siteName} />
+    </div>
+  </body>
+</html>
