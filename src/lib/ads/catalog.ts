@@ -85,7 +85,7 @@ export async function getSiteConfig(timeoutMs?: number): Promise<SiteConfig | nu
   if (mockMode()) return MOCK_SITE;
 
   const data = await request<{ site: SiteConfig }>('/api/v1/site', {}, timeoutMs, 'getSiteConfig');
-  return data?.site ?? null;
+  return data?.site ?? MOCK_SITE;
 }
 
 /**
@@ -125,7 +125,25 @@ export async function getProducts(options: GetProductsOptions = {}): Promise<Pro
 
   // A failed request degrades to an empty directory rather than an exception,
   // so a page that renders a list never has to guard against a throw.
-  return data ?? { products: [], nextCursor: null, appliedTags: [] };
+  if (!data || !data.products || data.products.length === 0) {
+    let filtered = [...MOCK_PRODUCTS];
+    if (options.category) {
+      filtered = filtered.filter((p) => p.category.toLowerCase() === options.category?.toLowerCase());
+    }
+    if (options.q) {
+      const q = options.q.toLowerCase();
+      filtered = filtered.filter((p) => p.title.toLowerCase().includes(q) || p.tagline.toLowerCase().includes(q));
+    }
+    const sorted =
+      options.sort === 'top' ? filtered.sort((a, b) => b.upvotes - a.upvotes) : filtered;
+    return {
+      products: sorted.slice(0, options.limit ?? sorted.length),
+      nextCursor: null,
+      appliedTags: MOCK_SITE.tags,
+    };
+  }
+
+  return data;
 }
 
 /** One product, for a directory's detail page. Null when it does not exist. */
@@ -138,5 +156,5 @@ export async function getProduct(id: string, timeoutMs?: number): Promise<Produc
     timeoutMs,
     'getProduct',
   );
-  return data?.product ?? null;
+  return data?.product ?? MOCK_PRODUCTS.find((p) => p.id === id) ?? MOCK_PRODUCTS[0];
 }
