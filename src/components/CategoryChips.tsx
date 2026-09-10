@@ -36,7 +36,7 @@ const CATEGORIES = [
 export function CategoryChips({ activeCategory }: { activeCategory?: string }) {
   return (
     <div className="category-chips-wrapper">
-      <div className="category-chips-scroll">
+      <div className="category-chips-scroll category-chips-list">
         {CATEGORIES.map((cat) => {
           const isAll = cat.path === '/';
           const isActive = isAll ? !activeCategory : activeCategory === cat.path.replace('/category/', '');
@@ -44,7 +44,7 @@ export function CategoryChips({ activeCategory }: { activeCategory?: string }) {
             <a
               key={cat.path}
               href={cat.path}
-              className={`chip ${isActive ? 'chip-active' : ''}`}
+              className={`category-chip ${isActive ? 'active chip-active' : ''}`}
             >
               {cat.label}
             </a>

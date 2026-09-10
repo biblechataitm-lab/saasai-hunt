@@ -224,36 +224,65 @@ a {
 }
 
 /* Category Chips Bar */
+.category-chips-wrapper,
 .category-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
+  display: block;
   overflow-x: auto;
   padding-bottom: 0.5rem;
   margin-bottom: 2rem;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
+.category-chips-wrapper::-webkit-scrollbar,
 .category-bar::-webkit-scrollbar {
   display: none;
 }
 
-.chip {
-  padding: 0.45rem 0.9rem;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  transition: all 0.2s;
+.category-chips-scroll,
+.category-chips-list {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: nowrap !important;
+  width: max-content;
+  padding: 2px 0;
 }
 
-.chip:hover, .chip.active {
-  background-color: var(--swiss-red-light);
-  border-color: var(--swiss-red);
-  color: var(--swiss-red);
+.category-chip,
+.chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 18px !important;
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 9999px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--text-secondary) !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.category-chip:hover,
+.chip:hover {
+  background-color: var(--bg-surface-hover) !important;
+  border-color: var(--border-bright) !important;
+  color: var(--text-primary) !important;
+  transform: translateY(-1px) !important;
+}
+
+.category-chip.active,
+.category-chip.chip-active,
+.chip.active,
+.chip.chip-active {
+  background-color: var(--swiss-red) !important;
+  border-color: var(--swiss-red) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(230, 57, 70, 0.35) !important;
 }
 
 /* Product Card - Swiss Typography Style */
